@@ -16,6 +16,7 @@ public abstract class PS {
 		_setor=setor;
 		_categoriaTributaria=categoriaTributaria;
 		_outros=outros;
+		_listaPS = new ArrayList<PS>();
 	}
 	
 	protected void addPS(PS ps) throws Exception{
@@ -35,7 +36,10 @@ public abstract class PS {
 	}
 	
 	protected void aceitarVisitante(psVisitor visitor) {
-        visitor.visitar(_listaPS,this);
+		for (int i = 0; i < _listaPS.size(); i++) {
+	         _listaPS.get(i).aceitarVisitante(visitor);
+	      }
+	      visitor.visitar(this);
     }
 	
 	public String getName() {
@@ -46,6 +50,17 @@ public abstract class PS {
 		return _preco;
 	}
 	
+	public String getSetor() {
+		return _setor;
+	}
+	
+	public int getCategoriaTributaria() {
+		return _categoriaTributaria;
+	}
+	
+	public String getOutros() {
+		return _outros;
+	}
 	
 }
 	
