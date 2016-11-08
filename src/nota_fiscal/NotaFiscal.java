@@ -10,6 +10,9 @@ public final class NotaFiscal {
 	private final String _outros;
 	private final ArrayList<ItemDeVenda> _itensLista;
 	
+	public int getId(){
+		return _id;
+	}
 	public NotaFiscal(NFBuilder NF, int id) {
 		_outros = "";
 		_id = id;
@@ -18,6 +21,5 @@ public final class NotaFiscal {
 		_itensLista = NF.getItemsList();
 		
 	}
-
 
 }
