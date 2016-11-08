@@ -1,8 +1,8 @@
 package ps;
 
-public class ProdutoNode extends PS {	
+public class ServiceNode extends PS {
 	
-	public ProdutoNode(String nome, float preco, String setor, int categoriaTributaria, String outros){
+	public ServiceNode(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		super(nome, preco, setor, categoriaTributaria, outros);
 	}
 	

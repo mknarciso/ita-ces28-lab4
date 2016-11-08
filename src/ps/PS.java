@@ -31,6 +31,7 @@ public abstract class PS {
 	protected PS getPS(int index) throws Exception{
 		throw new Exception("Não pode obter Produto/Serviço em: "
                 + this._nome + " - É o Produto/Serviço final");
+
 	}
 	
 	protected void aceitarVisitante(psVisitor visitor) {
@@ -40,6 +41,8 @@ public abstract class PS {
 	public String getName() {
 		return _nome;
 	}
+	
+	
 }
 	
 	
