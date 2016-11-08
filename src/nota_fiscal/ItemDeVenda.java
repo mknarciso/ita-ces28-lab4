@@ -1,16 +1,22 @@
 package nota_fiscal;
 
-import java.util.ArrayList;
 
-import ps.ProductService;
+import ps.PS;
+import ps.DbConnectPS;
 
 public class ItemDeVenda {
 	private int _quantidade;
 	private String _outros;
-	private ArrayList<ProductService> _listaPS;
+	private PS _PS;
 	
-	public ItemDeVenda () {
-		
+	public ItemDeVenda (String productServ, int quantity) {
+		_quantidade = quantity;
+		DbConnectPS dbConnectPS = DbConnectPS.getInstance();
+		_PS = dbConnectPS.getPS(productServ);
+	}
+	
+	public String getName() {
+		return _PS.getName();
 	}
 
 }
