@@ -10,4 +10,8 @@ public class NotaFiscal {
 	private ArrayList<ItemDeVenda> _itensLista;
 	
 	NotaFiscal() {};
+	
+	public int getId(){
+		return _id;
+	}
 }
