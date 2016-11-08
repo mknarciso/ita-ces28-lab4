@@ -18,7 +18,7 @@ public final class NotaFiscal {
 		_id = id;
 		_valor = NF.getValue();
 		_impostos = NF.getImposto();
-		_itensLista = NF.getItemsList();
+		_itensLista = (ArrayList<ItemDeVenda>) NF.getItemsList();
 		
 	}
 	
