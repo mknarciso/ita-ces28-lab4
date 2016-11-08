@@ -41,6 +41,10 @@ public abstract class PS {
 	public String getName() {
 		return _nome;
 	}
+
+	public float getPrice() {
+		return _preco;
+	}
 	
 	
 }

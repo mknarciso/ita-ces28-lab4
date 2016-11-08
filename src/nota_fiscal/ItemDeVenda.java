@@ -15,6 +15,9 @@ public final class ItemDeVenda {
 		_PS = dbConnectPS.getPS(productServ);
 		_outros = "";
 	}
+	public float getPrice() {
+		return _PS.getPrice();
+	}
 	
 	public String getName() {
 		return _PS.getName();

@@ -10,13 +10,13 @@ import java.util.List;
 public class NFBuilder {
 	//nota fiscal em elaboração
 	
-	private int _valor;
+	private int _valor = 0;
 	private float _impostos;
 	private String _outros;
 	private ArrayList<ItemDeVenda> _itensLista;
 	private boolean _validate = false;
 	
-	NFBuilder(String productServ, int quantity) {
+	public NFBuilder(String productServ, int quantity) {
 		addItemDeVenda(productServ, quantity);
 		
 	}
@@ -43,6 +43,7 @@ public class NFBuilder {
 	public void addItemDeVenda(String productServ, int quantity) {
 		ItemDeVenda itemDeVenda = new ItemDeVenda(productServ, quantity);
 		_itensLista.add(itemDeVenda);
+		_valor += itemDeVenda.getPrice();
 		
 		
 	}
@@ -54,7 +55,7 @@ public class NFBuilder {
 		});
 		
 	};
-	public void validateNF() throws NotValidNFException {
+	private void validateNF() throws NotValidNFException {
 		try {
 			_impostos = DbConnectTax.getInstance().calculateTax(_itensLista);
 		} catch (Exception e) {
@@ -70,6 +71,7 @@ public class NFBuilder {
 		for (int i = 0; i < _itensLista.size(); i++) {
 			elaborationNF = elaborationNF + _itensLista.get(i).getName() + ", " + 
 					_itensLista.get(i).getQuantity() + " unidades\n";
+			
 		};
 		return elaborationNF;
 	}
