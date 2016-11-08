@@ -19,4 +19,8 @@ public class ItemDeVenda {
 		return _PS.getName();
 	}
 
+	public int getQuantity() {
+		return _quantidade;
+	}
+
 }
