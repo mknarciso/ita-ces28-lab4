@@ -14,8 +14,10 @@ public class DbPS {
 	}
 	protected PS getPS(String name){
 		for(int i=0;i<dados.size();i++){
-			if (dados.get(i)._nome.equals(name))
-				return dados.get(i);
+			if (dados.get(i)._nome.equals(name)){
+				PS result = dados.get(i);
+				return new ProdutoFinal(result._nome, result._preco, result._setor, result._categoriaTributaria, result._outros, result._listaPS);
+			}
 		}
 		return null;
 	}
