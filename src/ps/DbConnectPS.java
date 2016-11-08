@@ -19,7 +19,12 @@ public class DbConnectPS { // Singleton
 	   }
 
 	   DbPS psDB;
+	   
 	   public List<PS> getAll(){
 		   return psDB.getAll();
+	   }
+	   
+	   public void addPS(PS newProduct){
+		   psDB.addPS(newProduct);
 	   }
 }
