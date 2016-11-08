@@ -10,7 +10,7 @@ public class DbConnectTax {
 	   //make the constructor private so that this class cannot be
 	   //instantiated
 	   private DbConnectTax(){
-		   DbTax taxDB = new DbTax(); 
+		   taxDB = new DbTax(); 
 	   }
 
 	   //Get the only object available
@@ -19,7 +19,7 @@ public class DbConnectTax {
 	   }
 	   
 	   public float calculateTax(ArrayList<ItemDeVenda> idv){
-		   return taxDB.calculateTax(idv);
+		   return (float)taxDB.calculateTax(idv);
 	   }
 
 	   DbTax taxDB;

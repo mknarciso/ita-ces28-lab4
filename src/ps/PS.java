@@ -19,27 +19,38 @@ public abstract class PS {
 	}
 	
 	protected void addPS(PS ps) throws Exception{
-		throw new Exception("Não pode inserir Produto/Serviço em: "
-                + this._nome + " - Já é o Produto/Serviço final");
+		throw new Exception("Nï¿½o pode inserir Produto/Serviï¿½o em: "
+                + this._nome + " - Jï¿½ ï¿½ o Produto/Serviï¿½o final");
 	}
 	
 	protected void removePS(PS ps) throws Exception{
-		throw new Exception("Não pode remover Produto/Serviço em: "
-                + this._nome + " - Já é o Produto/Serviço final");
+		throw new Exception("Nï¿½o pode remover Produto/Serviï¿½o em: "
+                + this._nome + " - Jï¿½ ï¿½ o Produto/Serviï¿½o final");
 	}
 	
 	protected PS getPS(int index) throws Exception{
-		throw new Exception("Não pode obter Produto/Serviço em: "
-                + this._nome + " - É o Produto/Serviço final");
+		throw new Exception("Nï¿½o pode obter Produto/Serviï¿½o em: "
+                + this._nome + " - ï¿½ o Produto/Serviï¿½o final");
 
 	}
 	
-	protected void aceitarVisitante(psVisitor visitor) {
-        visitor.visitar(_listaPS,this);
+	public void aceitarVisitante(psVisitor visitor) {
+		for (int i = 0; i < _listaPS.size(); i++) {
+			_listaPS.get(i).aceitarVisitante(visitor);
+		}
+        visitor.visitar(this);
     }
 	
 	public String getName() {
 		return _nome;
+	}
+
+	public float getPrice() {
+		return _preco;
+	}
+
+	public int getCategoriaTributaria() {
+		return _categoriaTributaria;
 	}
 	
 	
