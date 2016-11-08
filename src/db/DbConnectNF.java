@@ -28,10 +28,14 @@ public class DbConnectNF { // Singleton
 		public NotaFiscal getNF(int id){
 			return nfDB.getNF(id);
 		}
-		public void persistNF(NotaFiscal newNF){
-			nfDB.persistNF(newNF);
+		public void persistNF(NotaFiscal newNF) throws NFAlreadyValidatedException {
+			if (!nfDB.existsNF(newNF.getId()))
+				nfDB.persistNF(newNF);
+			else throw new NFAlreadyValidatedException();
 		}	   
-	   public int generateID(NFBuilder newNF){
-		   return nfDB.generateID(newNF);
+	   public int generateID(NFBuilder newNF) throws NFAlreadyValidatedException{
+		   if (newNF.isValidated())
+			   return nfDB.generateID(newNF);
+		   else throw new NFAlreadyValidatedException();
 	   }
 }

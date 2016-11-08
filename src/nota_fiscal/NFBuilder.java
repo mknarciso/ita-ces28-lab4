@@ -1,6 +1,11 @@
 package nota_fiscal;
 
+import db.DbConnectNF;
+import db.NFAlreadyValidatedException;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class NFBuilder {
 	//nota fiscal em elaboração
@@ -9,22 +14,29 @@ public class NFBuilder {
 	private float _impostos;
 	private String _outros;
 	private ArrayList<ItemDeVenda> _itensLista;
+	private boolean _validate = false;
 	
 	NFBuilder(String productServ, int quantity) {
 		addItemDeVenda(productServ, quantity);
 		
 	}
-	private NotaFiscal saveNF() {
+	public NotaFiscal saveNF() {
 		try {
 			validateNF();
-			int id = DbConnectNF.getInstance().generateID(this);
-			NotaFiscal notaFiscal = new NotaFiscal(this, id);
-			DbConnectNF.getInstance().persistNF(notaFiscal);
-			return notaFiscal;
+			try { 
+				int id = DbConnectNF.getInstance().generateID(this);
+				NotaFiscal notaFiscal = new NotaFiscal(this, id);
+				DbConnectNF.getInstance().persistNF(notaFiscal);
+				_validate = true;
+				return notaFiscal;
+			} catch (NFAlreadyValidatedException e) {
+				System.out.println("NF already validated");
+				e.printStackTrace();
+			}			
 		} catch (NotValidNFException e) {
 			System.out.println("NF not validated");
 		}
-		
+		return null;
 		
 	}
 	
@@ -42,15 +54,18 @@ public class NFBuilder {
 		});
 		
 	};
-	public void validateNF() {
-		_impostos = DbConnectTax.getInstance().calculateTax(_itensLista);
-		if (_impostos < 0)
-			throw new NotValidNFException();
+	public void validateNF() throws NotValidNFException {
+		try {
+			_impostos = DbConnectTax.getInstance().calculateTax(_itensLista);
+		} catch (Exception e) {
+			throw new NotValidNFException();			
+		}
+		
 	}
 	
 	public String printNF() {
 		String elaborationNF;
-		elaborationNF = "NF in elaboration\n"
+		elaborationNF = "NF em elaboração\n"
 				+ "IV List:\n";
 		for (int i = 0; i < _itensLista.size(); i++) {
 			elaborationNF = elaborationNF + _itensLista.get(i).getName() + ", " + 
@@ -66,8 +81,11 @@ public class NFBuilder {
 	public float getImposto() {
 		return _impostos;
 	}
-	public ArrayList<ItemDeVenda> getItemsList() {
-		return _itensLista;
+	public List<ItemDeVenda> getItemsList() {
+		return Collections.unmodifiableList(_itensLista);
+	}
+	public boolean isValidated() {
+		return _validate;
 	}
 
 	
