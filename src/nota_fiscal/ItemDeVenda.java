@@ -22,5 +22,9 @@ public class ItemDeVenda {
 	public int getQuantity() {
 		return _quantidade;
 	}
+	
+	public PS getPS(){
+		return _PS;
+	}
 
 }
