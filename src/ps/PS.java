@@ -16,6 +16,7 @@ public abstract class PS {
 		_setor=setor;
 		_categoriaTributaria=categoriaTributaria;
 		_outros=outros;
+		_listaPS = new ArrayList<PS>();
 	}
 	
 	protected void addPS(PS ps) throws Exception{
@@ -49,10 +50,22 @@ public abstract class PS {
 		return _preco;
 	}
 
+	
+	public String getSetor() {
+		return _setor;
+	}
+	
 	public int getCategoriaTributaria() {
 		return _categoriaTributaria;
 	}
 	
+	public String getOutros() {
+		return _outros;
+	}
+	
+	public ArrayList<PS> getLista(){
+		return _listaPS;
+	}
 	
 }
 	

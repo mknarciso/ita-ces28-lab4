@@ -29,5 +29,13 @@ public class DbNF {
 		_id++;
 		return _id;
 	}
+	
+	public boolean existsNF(int id) {
+		for (int i = 0; i < nfs.size(); i++) {
+			if (nfs.get(i).getId() == id)
+				return true;			
+		}
+		return false;
+	}
 
 }
