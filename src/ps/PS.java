@@ -19,23 +19,23 @@ public abstract class PS {
 		_listaPS = new ArrayList<PS>();
 	}
 	
-	protected void addPS(PS ps) throws Exception{
+	public void addPS(PS ps) throws Exception{
 		throw new Exception("Não pode inserir Produto/Serviço em: "
                 + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
-	protected void removePS(PS ps) throws Exception{
+	public void removePS(PS ps) throws Exception{
 		throw new Exception("Não pode remover Produto/Serviço em: "
                 + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
-	protected PS getPS(int index) throws Exception{
+	public PS getPS(int index) throws Exception{
 		throw new Exception("Não pode obter Produto/Serviço em: "
                 + this._nome + " - É o Produto/Serviço final");
 
 	}
 	
-	protected void aceitarVisitante(psVisitor visitor) {
+	public void aceitarVisitante(psVisitor visitor) {
 		for (int i = 0; i < _listaPS.size(); i++) {
 	         _listaPS.get(i).aceitarVisitante(visitor);
 	      }
@@ -60,6 +60,10 @@ public abstract class PS {
 	
 	public String getOutros() {
 		return _outros;
+	}
+	
+	public ArrayList<PS> getLista(){
+		return _listaPS;
 	}
 	
 }
