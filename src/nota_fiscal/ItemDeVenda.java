@@ -2,7 +2,7 @@ package nota_fiscal;
 
 import java.util.ArrayList;
 
-import prod_serv.ProductService;
+import ps.ProductService;
 
 public class ItemDeVenda {
 	private int _quantidade;
