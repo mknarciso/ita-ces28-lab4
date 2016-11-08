@@ -1,11 +1,14 @@
 package ps;
 
+import java.util.ArrayList;
+
 public abstract class PS {
 	protected String _nome;
 	protected float _preco;
 	protected String _setor;
 	protected int _categoriaTributaria;
 	protected String _outros;
+	protected ArrayList<PS> _listaPS;
 	
 	public PS(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		_nome=nome;
@@ -16,17 +19,28 @@ public abstract class PS {
 	}
 	
 	protected void addPS(PS ps) throws Exception{
-		throw new Exception("Nï¿½o pode inserir Produto/Serviï¿½o em: "
-                + this._nome + " - Jï¿½ ï¿½ o Produto/Serviï¿½o final");
+		throw new Exception("Não pode inserir Produto/Serviço em: "
+                + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
 	protected void removePS(PS ps) throws Exception{
-		throw new Exception("Nï¿½o pode remover Produto/Serviï¿½o em: "
-                + this._nome + " - Jï¿½ ï¿½ o Produto/Serviï¿½o final");
+		throw new Exception("Não pode remover Produto/Serviço em: "
+                + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
 	protected PS getPS(int index) throws Exception{
-		throw new Exception("Nï¿½o pode obter Produto/Serviï¿½o em: "
-                + this._nome + " - ï¿½ o Produto/Serviï¿½o final");
+		throw new Exception("Não pode obter Produto/Serviço em: "
+                + this._nome + " - É o Produto/Serviço final");
+	}
+	
+	protected void aceitarVisitante(psVisitor visitor) {
+        visitor.visitar(_listaPS,this);
+    }
+	
+	public String getName() {
+		return _nome;
 	}
 }
+	
+	
+
