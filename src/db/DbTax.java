@@ -14,12 +14,14 @@ public class DbTax {
 		imposto2 = new ICMS(); 
 		for(int i=0;i<idv.size();i++){
 			itemQtde = idv.get(i).getQuantity();
+			//System.out.println(idv.get(0).getPS());
 			allTaxes(idv.get(i).getPS());
 		}
 		return sumTaxes();
 	}
 
 	private double sumTaxes() {
+		//System.out.println("Sum Taxes:"+imposto1.getTotal()+"+"+imposto2.getTotal());
 		return imposto1.getTotal()+imposto2.getTotal();
 	}
 

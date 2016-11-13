@@ -13,12 +13,11 @@ public abstract class Imposto implements psVisitor {
 
 		@Override
 		public void visitar(PS ps) {
+			//System.out.println("CalculaImposto:"+DbTax.itemQtde+","+ps.getPrice()+","+ps.getCategoriaTributaria());
 			calculaImposto(DbTax.itemQtde,ps.getPrice(),ps.getCategoriaTributaria());		
 			
 		}
 
-		private void calculaImposto(int itemQtde, float price, int categoriaTributaria) {
-			// TODO Auto-generated method stub
-		}
+		public  abstract void calculaImposto(int itemQtde, float price, int categoriaTributaria);
 
 	}

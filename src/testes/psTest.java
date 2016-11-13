@@ -11,8 +11,8 @@ import ps.Servico;
 
 public class psTest {
 	PS produtoT1 = new Produto("T1", 15, "Frutas", 1 , "Produto principal");
-	PS produtoT2 = new Produto("T2", 15, "Frutas", 1 , "Produto principal");
-	PS servicoS1 = new Servico("S1", 15, "Frutas", 1 , "Serviço principal");
+	PS produtoT2 = new Produto("T2", 10, "Frutas", 1 , "Produto principal");
+	PS servicoS1 = new Servico("S1", 23, "Frutas", 1 , "Serviï¿½o principal");
 	
 	
 	@Test
@@ -20,41 +20,33 @@ public class psTest {
 		DbConnectPS dbconn = DbConnectPS.getInstance();
 		dbconn.addPS(produtoT1);
 		dbconn.addPS(servicoS1);
-		
 		assertEquals("Correto", "T1", dbconn.getPS("T1").getName());
 		assertEquals("Correto", "S1", dbconn.getPS("S1").getName());
 	}
 	
 	@Test
-	public void testAddProductTree(){
+	public void testAddProductTree() throws Exception{
 		DbConnectPS dbconn = DbConnectPS.getInstance();
 		dbconn.addPS(produtoT1);
 		dbconn.addPS(servicoS1);
-		PS pd1;
-		PS sv1;
-		
-		pd1 = dbconn.getPS("T1");
-		sv1 = dbconn.getPS("S1");
-		
-		try {
-			produtoT2.addPS(pd1);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-		try {
-			produtoT2.addPS(sv1);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
+		produtoT2.addPS(dbconn.getPS("T1"));
+		produtoT2.addPS(dbconn.getPS("S1"));
 		dbconn.addPS(produtoT2);
-		
-		try {
-			assertEquals("Correto", "S1", dbconn.getPS("T2").getPS(1).getName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		assertEquals("Correto", "S1", dbconn.getPS("T2").getPS(1).getName());
+	}
+	@Test
+	public void checkPrice() throws Exception{
+		assertEquals(15,produtoT1.getPrice(),0.01);
+		assertEquals(10,produtoT2.getPrice(),0.01);
+		DbConnectPS dbconn = DbConnectPS.getInstance();
+		dbconn.addPS(produtoT1);
+		dbconn.addPS(servicoS1);
+		produtoT2.addPS(dbconn.getPS("T1"));
+		assertEquals(25,produtoT2.getPrice(),0.01);
+		produtoT2.addPS(dbconn.getPS("S1"));
+		assertEquals(48,produtoT2.getPrice(),0.01);
+		dbconn.addPS(produtoT2);
+		assertEquals(48, dbconn.getPS("T2").getPrice(),0.01);	
 	}
 
 }

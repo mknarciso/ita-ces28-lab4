@@ -13,6 +13,7 @@ public class DbPS {
 		dados.add(newProduct);
 	}
 	protected PS getPS(String name){
+		//System.out.println(dados.size()+" PS no banco de dados.");
 		for(int i=0;i<dados.size();i++){
 			if (dados.get(i)._nome.equals(name)){
 				PS result = dados.get(i);

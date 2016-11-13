@@ -19,6 +19,7 @@ public class DbConnectTax {
 	   }
 	   
 	   public float calculateTax(ArrayList<ItemDeVenda> idv){
+		   //System.out.println("DbConnectTax.calculateTax:"+idv);
 		   return (float)taxDB.calculateTax(idv);
 	   }
 

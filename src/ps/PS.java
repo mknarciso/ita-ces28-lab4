@@ -19,19 +19,19 @@ public abstract class PS {
 		_listaPS = new ArrayList<PS>();
 	}
 	
-	protected void addPS(PS ps) throws Exception{
-		throw new Exception("N�o pode inserir Produto/Servi�o em: "
-                + this._nome + " - J� � o Produto/Servi�o final");
+	public void addPS(PS ps) throws Exception{
+		throw new Exception("Não pode inserir Produto/Serviço em: "
+                + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
 	protected void removePS(PS ps) throws Exception{
-		throw new Exception("N�o pode remover Produto/Servi�o em: "
-                + this._nome + " - J� � o Produto/Servi�o final");
+		throw new Exception("Não pode remover Produto/Serviço em: "
+                + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
-	protected PS getPS(int index) throws Exception{
-		throw new Exception("N�o pode obter Produto/Servi�o em: "
-                + this._nome + " - � o Produto/Servi�o final");
+	public PS getPS(int index) throws Exception{
+		throw new Exception("Não pode obter Produto/Serviço em: "
+                + this._nome + " - é o Produto/Serviço final");
 
 	}
 	
@@ -47,7 +47,9 @@ public abstract class PS {
 	}
 
 	public float getPrice() {
-		return _preco;
+		PriceCalculator pc = new PriceCalculator();
+		this.aceitarVisitante(pc);;
+		return (float)pc.getTotal();
 	}
 
 	
