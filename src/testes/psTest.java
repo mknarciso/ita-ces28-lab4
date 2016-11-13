@@ -9,7 +9,7 @@ import ps.PS;
 import ps.Produto;
 import ps.Servico;
 
-public class psTest {
+public class PsTest {
 	PS produtoT1 = new Produto("T1", 15, "Frutas", 1 , "Produto principal");
 	PS produtoT2 = new Produto("T2", 10, "Frutas", 1 , "Produto principal");
 	PS servicoS1 = new Servico("S1", 23, "Frutas", 1 , "Servi�o principal");

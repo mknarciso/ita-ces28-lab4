@@ -8,7 +8,7 @@ import org.junit.Test;
 import nota_fiscal.NFBuilder;
 import nota_fiscal.NotaFiscal;
 
-public class ClientTests {
+public class ClientTest {
 
 	@Before
 	public void setup() {
@@ -17,7 +17,7 @@ public class ClientTests {
 	@Test
 	public void testNFBuilder() {
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);
-		String result = "NF em elaboração\n"
+		String result = "NF em elaboraï¿½ï¿½o\n"
 				+ "IV List:\n" + "banana, 40 unidades\n";
 		assertEquals(nFBuilder.printNF(), result);
 		assertEquals (nFBuilder.getValue(), 100.0, 0.1 );

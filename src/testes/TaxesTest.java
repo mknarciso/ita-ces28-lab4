@@ -20,9 +20,10 @@ public class TaxesTest {
 	static PS T1;
 	static PS T2;
 	static PS S1;
-	static ArrayList lista;
+	static ArrayList<ItemDeVenda> lista;
 	static ItemDeVenda iv;
 	static DbConnectPS PsDb;
+	static DbConnectTax dbTax;
 	@BeforeClass
 	public static void prepare() throws Exception{
 		PsDb = DbConnectPS.getInstance();
@@ -36,9 +37,8 @@ public class TaxesTest {
 		T1.addPS(PsDb.getPS("S1"));
 		T2.addPS(PsDb.getPS("S1"));
 		T1.addPS(PsDb.getPS("T2"));
-		iv = new ItemDeVenda("T1",2);
-		lista.add(iv);
 		//System.out.println(iv);
+		dbTax = DbConnectTax.getInstance();
 	}
 	@Test
 	public void checkPsReturn(){
@@ -48,8 +48,18 @@ public class TaxesTest {
 	
 	@Test
 	public void taxesTest1() {
-		DbConnectTax dbTax = DbConnectTax.getInstance();
+		lista = new ArrayList<ItemDeVenda>();
+		iv = new ItemDeVenda("T1",2);
+		lista.add(iv);
 		assertEquals(24.4,dbTax.calculateTax(lista),0.01);
 	}
-
+	@Test
+	public void taxesTestWithTwoIV() {
+		lista = new ArrayList<ItemDeVenda>();
+		iv = new ItemDeVenda("T1",2);
+		lista.add(iv);
+		ItemDeVenda iv2 = new ItemDeVenda("S1",5);
+		lista.add(iv2);
+		assertEquals(27.4,dbTax.calculateTax(lista),0.01);
+	}
 }

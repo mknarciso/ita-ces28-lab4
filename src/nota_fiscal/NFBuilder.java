@@ -1,6 +1,7 @@
 package nota_fiscal;
 
 import db.DbConnectNF;
+import db.DbConnectTax;
 import db.NFAlreadyValidatedException;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class NFBuilder {
-	//nota fiscal em elaboração
+	//nota fiscal em elaboraï¿½ï¿½o
 	
 	private int _valor = 0;
 	private float _impostos;
@@ -66,7 +67,7 @@ public class NFBuilder {
 	
 	public String printNF() {
 		String elaborationNF;
-		elaborationNF = "NF em elaboração\n"
+		elaborationNF = "NF em elaboraï¿½ï¿½o\n"
 				+ "IV List:\n";
 		for (int i = 0; i < _itensLista.size(); i++) {
 			elaborationNF = elaborationNF + _itensLista.get(i).getName() + ", " + 
