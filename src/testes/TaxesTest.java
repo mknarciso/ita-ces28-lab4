@@ -24,16 +24,16 @@ public class TaxesTest {
 	@BeforeClass
 	public static void prepare() throws Exception{
 		PsDb = DbConnectPS.getInstance();
-		T1 = new Produto("T1", 15, "Produtos", 1 , "obs");
-		PsDb.addPS(T1);
-		T2 = new Produto("T2", 25, "Produtos", 2 , "obs 2");
-		PsDb.addPS(T2);
 		S1 = new Servico("S1", 10, "Serviços", 3 , "obs 3");
 		PsDb.addPS(S1);
+		T1 = new Produto("T1", 15, "Produtos", 1 , "obs");
+		T2 = new Produto("T2", 25, "Produtos", 2 , "obs 2");
 		lista = new ArrayList<ItemDeVenda>();
-		T1.addPS(PsDb.getPS("S1"));
 		T2.addPS(PsDb.getPS("S1"));
+		PsDb.addPS(T2);
+		T1.addPS(PsDb.getPS("S1"));
 		T1.addPS(PsDb.getPS("T2"));
+		PsDb.addPS(T1);
 		//System.out.println(iv);
 		dbTax = DbConnectTax.getInstance();
 	}
