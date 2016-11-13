@@ -2,17 +2,42 @@ package testes;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
 import nota_fiscal.NFBuilder;
 import nota_fiscal.NotaFiscal;
+import ps.DbConnectPS;
+import ps.PS;
+import ps.Produto;
+import ps.Servico;
 
 public class ClientTest {
-
-	@Before
-	public void setup() {
-		//populate ps db's;
+	static PS f1,f2,f3,p1,c1,s1;
+	static DbConnectPS psDB;
+	
+	@BeforeClass
+	public static void setup() throws Exception {
+		psDB = DbConnectPS.getInstance();
+		c1 = new Produto("Caixa", 2, "Embalagem", 1 , "obs");
+		psDB.addPS(c1);
+		s1 = new Servico("Transporte", 23, "Logistica", 3 , "Serviço principal");
+		psDB.addPS(s1);
+		f1 = new Produto("banana", 15, "Frutas", 2 , "Produto principal");
+		f1.addPS(psDB.getPS("Caixa"));
+		f1.addPS(psDB.getPS("Transporte"));
+		psDB.addPS(f1);
+		f2 = new Produto("laranja", 10, "Frutas", 2 , "Produto principal");
+		f2.addPS(psDB.getPS("Caixa"));
+		f2.addPS(psDB.getPS("Transporte"));
+		psDB.addPS(f2);
+		f3 = new Produto("batata", 5, "Frutas", 2 , "Produto principal");
+		f3.addPS(psDB.getPS("Caixa"));
+		f3.addPS(psDB.getPS("Transporte"));
+		psDB.addPS(f3);
+		p1 = new Produto("bola", 25, "Equipamento", 1, "");
+		p1.addPS(psDB.getPS("Transporte"));
+		psDB.addPS(p1);
+		
 	}
 	@Test
 	public void testNFBuilder() {
@@ -20,17 +45,17 @@ public class ClientTest {
 		String result = "NF em elabora��o\n"
 				+ "IV List:\n" + "banana, 40 unidades\n";
 		assertEquals(nFBuilder.printNF(), result);
-		assertEquals (nFBuilder.getValue(), 100.0, 0.1 );
+		assertEquals (1600,nFBuilder.getValue(), 0.1 );
 		
 		nFBuilder.addItemDeVenda("laranja", 200);
 		
 		String resultTwo = result + "laranja, 200 unidades\n";
 		assertEquals(nFBuilder.printNF(), resultTwo);
-		assertEquals(nFBuilder.getValue(), 300.0, 0.1);
+		assertEquals(8600,nFBuilder.getValue(), 0.1);
 		
 		nFBuilder.removeItemDeVenda("laranja");
 		assertEquals (nFBuilder.printNF(), result);
-		assertEquals(nFBuilder.getValue(), 100.0, 0.1);
+		assertEquals(1600,nFBuilder.getValue(), 0.1);
 		
 		//TODO: Nested PS
 		
@@ -39,14 +64,14 @@ public class ClientTest {
 	@Test 
 	public void testgenerateNF() {
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);
-		nFBuilder.addItemDeVenda("batata", 100);
+		nFBuilder.addItemDeVenda("laranja", 200);
 		NotaFiscal notaFiscal = nFBuilder.saveNF();
-		assertEquals (nFBuilder.getImposto(), 50.0, 0.1);
+		assertEquals (996.64,nFBuilder.getImposto(), 0.1);
 		assertTrue (notaFiscal instanceof NotaFiscal);
-		assertEquals (notaFiscal.getId(), 1);
+		assertEquals (201600001,notaFiscal.getId());
 		NFBuilder nFBuilderTwo = new NFBuilder("bola", 10);
 		NotaFiscal notaFiscalTwo = nFBuilderTwo.saveNF();
-		assertEquals(notaFiscalTwo.getId(), 2);
+		assertEquals(201600002,notaFiscalTwo.getId());
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public final class NotaFiscal {
 	//immutable object
 	private final int _id;
-	private final float _valor;
+	private final double _valor;
 	private final float _impostos;
 	private final String _outros;
 	private final ArrayList<ItemDeVenda> _itensLista;
@@ -35,7 +35,7 @@ public final class NotaFiscal {
 		
 		return finalNF;
 	}
-	private float getValor() {
+	private double getValor() {
 		return _valor;
 	}
 	

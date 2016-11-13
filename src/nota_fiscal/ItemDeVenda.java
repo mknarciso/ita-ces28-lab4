@@ -16,7 +16,8 @@ public final class ItemDeVenda {
 		_outros = "";
 	}
 	public float getPrice() {
-		return _PS.getPrice();
+		//System.out.println(_PS);
+		return _PS.getPrice()*_quantidade;
 	}
 	
 	public String getName() {

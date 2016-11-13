@@ -6,18 +6,20 @@ import db.NFAlreadyValidatedException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class NFBuilder {
 	//nota fiscal em elabora��o
 	
-	private int _valor = 0;
+	private double _valor = 0;
 	private float _impostos;
 	private String _outros;
 	private ArrayList<ItemDeVenda> _itensLista;
 	private boolean _validate = false;
 	
 	public NFBuilder(String productServ, int quantity) {
+		_itensLista = new ArrayList<ItemDeVenda>();
 		addItemDeVenda(productServ, quantity);
 		
 	}
@@ -26,6 +28,7 @@ public class NFBuilder {
 			validateNF();
 			try { 
 				int id = DbConnectNF.getInstance().generateID(this);
+				System.out.println("Id:"+id);
 				NotaFiscal notaFiscal = new NotaFiscal(this, id);
 				DbConnectNF.getInstance().persistNF(notaFiscal);
 				_validate = true;
@@ -43,6 +46,8 @@ public class NFBuilder {
 	
 	public void addItemDeVenda(String productServ, int quantity) {
 		ItemDeVenda itemDeVenda = new ItemDeVenda(productServ, quantity);
+		//System.out.println(_itensLista);
+		//System.out.println(itemDeVenda.getPrice());
 		_itensLista.add(itemDeVenda);
 		_valor += itemDeVenda.getPrice();
 		
@@ -50,15 +55,21 @@ public class NFBuilder {
 	}
 
 	public void removeItemDeVenda(String productServ) {
-		_itensLista.forEach((item) -> {
+		for(Iterator<ItemDeVenda> i = _itensLista.iterator(); i.hasNext();){
+			ItemDeVenda atual = i.next();
+			if(atual.getName().equals(productServ))
+				i.remove();
+		}
+		/*_itensLista.forEach((item) -> {
 			if (item.getName() == productServ)
 				_itensLista.remove(item);
-		});
-		
-	};
+		});*/
+	}
+	
 	private void validateNF() throws NotValidNFException {
 		try {
 			_impostos = DbConnectTax.getInstance().calculateTax(_itensLista);
+			System.out.println("Impostos Total:"+_impostos);
 		} catch (Exception e) {
 			throw new NotValidNFException();			
 		}
@@ -77,7 +88,11 @@ public class NFBuilder {
 		return elaborationNF;
 	}
 	
-	public float getValue() {
+	public double getValue() {
+		_valor = 0;
+		_itensLista.forEach((item) -> {
+			_valor = _valor + item.getPrice();
+		});
 		return _valor;
 	}
 	
