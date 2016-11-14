@@ -7,8 +7,8 @@ import java.util.List;
 import nota_fiscal.*;
 
 public class DbNF {
-	int _id = 201600000;
-	List<NotaFiscal> nfs = new ArrayList<NotaFiscal>();
+	private int _id = 201600000;
+	private List<NotaFiscal> nfs = new ArrayList<NotaFiscal>();
 	
 	public List<NotaFiscal> getAll() {
 		return Collections.unmodifiableList(nfs);
