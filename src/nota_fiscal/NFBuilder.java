@@ -105,6 +105,9 @@ public class NFBuilder {
 	public boolean isValidated() {
 		return _validate;
 	}
+	public String getOutros() {
+		return _outros;
+	}
 
 	
 

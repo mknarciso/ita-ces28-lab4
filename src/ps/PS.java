@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class PS {
 	protected String _nome;
 	protected float _preco;
+	protected double _imposto;
 	protected String _setor;
 	protected int _categoriaTributaria;
 	protected String _outros;
@@ -41,17 +42,26 @@ public abstract class PS {
 		}
         visitor.visitar(this);
     }
-	
+	public void preAceitarVisitante(psVisitor visitor) {
+        visitor.visitar(this);
+		for (int i = 0; i < _listaPS.size(); i++) {
+			_listaPS.get(i).preAceitarVisitante(visitor);
+		}
+    }
 	public String getName() {
 		return _nome;
 	}
 
 	public float getPrice() {
 		PriceCalculator pc = new PriceCalculator();
-		this.aceitarVisitante(pc);;
+		this.aceitarVisitante(pc);
 		return (float)pc.getTotal();
 	}
-
+	public String printPS(){
+		PsPrinter prt = new PsPrinter();
+		this.preAceitarVisitante(prt);
+		return prt.getString();
+	}
 	
 	public String getSetor() {
 		return _setor;
@@ -67,6 +77,11 @@ public abstract class PS {
 	
 	public ArrayList<PS> getLista(){
 		return _listaPS;
+	}
+
+	public void setImposto(double last) {
+		_imposto = _imposto + last;
+		
 	}
 	
 }

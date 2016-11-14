@@ -5,8 +5,11 @@ public class IPI extends Imposto{
 	public void calculaImposto(int qtde, float valor, int cat) {
 		//System.out.println("IPI("+qtde+","+valor+"+"+cat+")");
 		//System.out.print(total+"=>");
+		last = 0;
 		if(cat==1)
-			total = total + 0.5*qtde+valor*0.16;
+			last = 0.5*qtde+valor*0.16;
+		
+		total = total + last;
 		//System.out.println(total);
 		
 		

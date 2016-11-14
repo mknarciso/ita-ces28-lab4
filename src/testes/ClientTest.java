@@ -57,8 +57,6 @@ public class ClientTest {
 		assertEquals (nFBuilder.printNF(), result);
 		assertEquals(1600,nFBuilder.getValue(), 0.1);
 		
-		//TODO: Nested PS
-		
 	}
 	
 	@Test 
@@ -69,9 +67,10 @@ public class ClientTest {
 		assertEquals (996.64,nFBuilder.getImposto(), 0.1);
 		assertTrue (notaFiscal instanceof NotaFiscal);
 		assertEquals (201600001,notaFiscal.getId());
+		System.out.println(notaFiscal.printNF());
 		NFBuilder nFBuilderTwo = new NFBuilder("bola", 10);
 		NotaFiscal notaFiscalTwo = nFBuilderTwo.saveNF();
 		assertEquals(201600002,notaFiscalTwo.getId());
+		System.out.println(notaFiscalTwo.printNF());
 	}
-
 }

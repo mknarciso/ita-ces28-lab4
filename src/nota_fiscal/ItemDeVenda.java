@@ -31,5 +31,11 @@ public final class ItemDeVenda {
 	public PS getPS(){
 		return _PS;
 	}
+	public String getOutros() {
+		return _outros;
+	}
+	public String printIV() {
+		return "==[ "+ _quantidade + " unidades de " + _PS.getName() + " ]==\n"+ _PS.printPS();
+	}
 
 }
