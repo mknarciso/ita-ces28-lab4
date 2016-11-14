@@ -10,7 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class NFBuilder {
-	//nota fiscal em elabora��o
+	//NF in elaboration
+	// Builds a NF from several ItemDeVenda's
 	
 	private double _valor = 0;
 	private double _impostos;
@@ -19,11 +20,14 @@ public class NFBuilder {
 	private boolean _validate = false;
 	
 	public NFBuilder(String productServ, int quantity) {
+		//Creates a NF Builder from a PS
 		_itensLista = new ArrayList<ItemDeVenda>();
 		addItemDeVenda(productServ, quantity);
 		
 	}
 	public NotaFiscal saveNF() {
+		//Validates NF, generate a final NF with unique ID 
+		//and persists it in database.
 		try {
 			validateNF();
 			try { 
@@ -33,18 +37,19 @@ public class NFBuilder {
 				DbConnectNF.getInstance().persistNF(notaFiscal);
 				_validate = true;
 				return notaFiscal;
-			} catch (NFAlreadyValidatedException e) {
-				System.out.println("NF already validated");
+			} catch (NFAlreadyValidatedException e) { //NF valid, but already validated
 				e.printStackTrace();
 			}			
-		} catch (NotValidNFException e) {
-			System.out.println("NF not validated");
+		} catch (NotValidNFException e) { //NF not valid!
+			e.printStackTrace();
+
 		}
 		return null;
 		
 	}
 	
 	public void addItemDeVenda(String productServ, int quantity) {
+		//Add a new ItemDeVenda in NF Builder.
 		ItemDeVenda itemDeVenda = new ItemDeVenda(productServ, quantity);
 		//System.out.println(_itensLista);
 		//System.out.println(itemDeVenda.getPrice());
@@ -55,18 +60,16 @@ public class NFBuilder {
 	}
 
 	public void removeItemDeVenda(String productServ) {
+		//Remove a Item de Venda by its type
 		for(Iterator<ItemDeVenda> i = _itensLista.iterator(); i.hasNext();){
 			ItemDeVenda atual = i.next();
 			if(atual.getName().equals(productServ))
 				i.remove();
 		}
-		/*_itensLista.forEach((item) -> {
-			if (item.getName() == productServ)
-				_itensLista.remove(item);
-		});*/
 	}
 	
 	private void validateNF() throws NotValidNFException {
+		//Validate NF: calculate taxes.
 		try {
 			_impostos = DbConnectTax.getInstance().calculateTax(_itensLista);
 			//System.out.println("Impostos Total:"+_impostos);
@@ -77,6 +80,7 @@ public class NFBuilder {
 	}
 	
 	public String printNF() {
+		//print NF
 		String elaborationNF;
 		elaborationNF = "NF em elabora��o\n"
 				+ "IV List:\n";

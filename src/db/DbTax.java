@@ -7,15 +7,15 @@ import ps.PS;
 
 public class DbTax {
 	// Each Tax is an object of a SubClass of Imposto
-	private IPI imposto1;
-	private ICMS imposto2;
+	private IPI taxIPI;
+	private ICMS taxICMS;
 	protected static int itemQtde;
 	
 	public double calculateTax(ArrayList<ItemDeVenda> idv) {
 		// This method is called once for each NF, so taxes instances are
 		// reset, and could keep persistent values through all NF Tax calculation 
-		imposto1 = new IPI(); 
-		imposto2 = new ICMS(); 
+		taxIPI = new IPI(); 
+		taxICMS = new ICMS(); 
 		for(int i=0;i<idv.size();i++){
 			//Gets IV quantity 
 			itemQtde = idv.get(i).getQuantity();
@@ -27,11 +27,11 @@ public class DbTax {
 	}
 
 	private double sumTaxes() {
-		return imposto1.getTotal()+imposto2.getTotal();
+		return taxIPI.getTotal()+taxICMS.getTotal();
 	}
 
 	private void allTaxes(PS raiz){
-		raiz.aceitarVisitante(imposto1);
-		raiz.aceitarVisitante(imposto2);
+		raiz.aceitarVisitante(taxIPI);
+		raiz.aceitarVisitante(taxICMS);
 	}
 }

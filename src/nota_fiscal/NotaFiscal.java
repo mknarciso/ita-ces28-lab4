@@ -3,7 +3,8 @@ package nota_fiscal;
 import java.util.List;
 
 public final class NotaFiscal {
-	//immutable object
+	//immutable object: Nota Fiscal
+	//This is a final format of a validated and persisted NF
 	private final int _id;
 	private final double _valor;
 	private final double _impostos;
@@ -23,13 +24,12 @@ public final class NotaFiscal {
 	}
 	
 	public String printNF() {
+		//print final NF
 		String finalNF;
 		finalNF = "NF completa - ID " + this.getId() + "\n"
 				+ "IV List:\n";
 		for (int i = 0; i < _itensLista.size(); i++) {
 			finalNF = finalNF + _itensLista.get(i).printIV();
-			//finalNF = finalNF + _itensLista.get(i).getName() + ", " + 
-			//		_itensLista.get(i).getQuantity() + " unidades\n";
 		};
 		finalNF = finalNF + "Valor final: " + this.getValor() + "\n";
 		finalNF = finalNF + "Impostos calculados: " + this.getImposto() + "\n";

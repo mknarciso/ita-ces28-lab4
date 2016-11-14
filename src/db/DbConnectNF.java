@@ -20,7 +20,7 @@ public class DbConnectNF { // Singleton
 		   return instance;
 	   	}
 
-	   	DbNF nfDB;
+	   	private DbNF nfDB;
 	   
 	   	public List<NotaFiscal> getAll(){
 	   		// This list is already immutable, and they items, NotaFiscal are also final

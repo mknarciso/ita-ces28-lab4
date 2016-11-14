@@ -1,6 +1,7 @@
 package ps;
 
 public class Produto extends PS {	
+	//Product Model
 	
 	public Produto(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		super(nome, preco, setor, categoriaTributaria, outros);
@@ -18,7 +19,7 @@ public class Produto extends PS {
 	
 	@Override
 	public PS getPS(int index){
-		if (index<=_listaPS.size() && index>0){
+		if (index <=_listaPS.size() && index > 0){
 			return _listaPS.get(index);
 		}
 		return null;

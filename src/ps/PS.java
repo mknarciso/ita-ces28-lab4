@@ -3,6 +3,8 @@ package ps;
 import java.util.ArrayList;
 
 public abstract class PS {
+	//PS is the abstraction of product and service (Abstract Coupling Pattern)
+	//PS is a composite in a tree structure
 	protected String _nome;
 	protected float _preco;
 	protected double _imposto;
@@ -20,22 +22,23 @@ public abstract class PS {
 		_listaPS = new ArrayList<PS>();
 	}
 	
+	//Add new PS to composite
 	public void addPS(String name) throws Exception{
 		throw new Exception("Não pode inserir Produto/Serviço em: "
                 + this._nome + " - Já é o Produto/Serviço final");
 	}
-	
+	//Remove PS from composite
 	protected void removePS(PS ps) throws Exception{
 		throw new Exception("Não pode remover Produto/Serviço em: "
                 + this._nome + " - Já é o Produto/Serviço final");
 	}
-	
+	//get PS from composite
 	public PS getPS(int index) throws Exception{
 		throw new Exception("Não pode obter Produto/Serviço em: "
                 + this._nome + " - é o Produto/Serviço final");
 
 	}
-	
+	//Accepts Visitor (Visitor Pattern)
 	public void aceitarVisitante(psVisitor visitor) {
 		for (int i = 0; i < _listaPS.size(); i++) {
 			_listaPS.get(i).aceitarVisitante(visitor);

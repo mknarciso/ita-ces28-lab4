@@ -1,7 +1,7 @@
 package ps;
 
 public class Servico extends PS {
-	
+	//Service Model
 	public Servico(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		super(nome, preco, setor, categoriaTributaria, outros);
 	}

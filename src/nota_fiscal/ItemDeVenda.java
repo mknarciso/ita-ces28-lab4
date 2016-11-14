@@ -5,6 +5,7 @@ import ps.PS;
 import ps.DbConnectPS;
 
 public final class ItemDeVenda {
+	//Item de venda has a unique PS 
 	private final int _quantidade;
 	private final String _outros;
 	private final PS _PS;
