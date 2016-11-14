@@ -7,8 +7,8 @@ public class Produto extends PS {
 	}
 	
 	@Override
-	public void addPS(PS ps){
-		_listaPS.add(ps);		
+	public void addPS(String name){
+		_listaPS.add(DbConnectPS.getInstance().getPS(name));		
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public abstract class PS {
 		_listaPS = new ArrayList<PS>();
 	}
 	
-	public void addPS(PS ps) throws Exception{
+	public void addPS(String name) throws Exception{
 		throw new Exception("Não pode inserir Produto/Serviço em: "
                 + this._nome + " - Já é o Produto/Serviço final");
 	}

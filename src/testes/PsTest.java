@@ -29,8 +29,8 @@ public class PsTest {
 		DbConnectPS dbconn = DbConnectPS.getInstance();
 		dbconn.addPS(produtoT1);
 		dbconn.addPS(servicoS1);
-		produtoT2.addPS(dbconn.getPS("T1"));
-		produtoT2.addPS(dbconn.getPS("S1"));
+		produtoT2.addPS("T1");
+		produtoT2.addPS("S1");
 		dbconn.addPS(produtoT2);
 		assertEquals("Correto", "S1", dbconn.getPS("T2").getPS(1).getName());
 	}
@@ -41,9 +41,9 @@ public class PsTest {
 		DbConnectPS dbconn = DbConnectPS.getInstance();
 		dbconn.addPS(produtoT1);
 		dbconn.addPS(servicoS1);
-		produtoT2.addPS(dbconn.getPS("T1"));
+		produtoT2.addPS("T1");
 		assertEquals(25,produtoT2.getPrice(),0.01);
-		produtoT2.addPS(dbconn.getPS("S1"));
+		produtoT2.addPS("S1");
 		assertEquals(48,produtoT2.getPrice(),0.01);
 		dbconn.addPS(produtoT2);
 		assertEquals(48, dbconn.getPS("T2").getPrice(),0.01);	

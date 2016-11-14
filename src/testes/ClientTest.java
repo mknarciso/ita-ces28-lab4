@@ -23,19 +23,19 @@ public class ClientTest {
 		s1 = new Servico("Transporte", 23, "Logistica", 3 , "Serviço principal");
 		psDB.addPS(s1);
 		f1 = new Produto("banana", 15, "Frutas", 2 , "Produto principal");
-		f1.addPS(psDB.getPS("Caixa"));
-		f1.addPS(psDB.getPS("Transporte"));
+		f1.addPS("Caixa");
+		f1.addPS("Transporte");
 		psDB.addPS(f1);
 		f2 = new Produto("laranja", 10, "Frutas", 2 , "Produto principal");
-		f2.addPS(psDB.getPS("Caixa"));
-		f2.addPS(psDB.getPS("Transporte"));
+		f2.addPS("Caixa");
+		f2.addPS("Transporte");
 		psDB.addPS(f2);
 		f3 = new Produto("batata", 5, "Frutas", 2 , "Produto principal");
-		f3.addPS(psDB.getPS("Caixa"));
-		f3.addPS(psDB.getPS("Transporte"));
+		f3.addPS("Caixa");
+		f3.addPS("Transporte");
 		psDB.addPS(f3);
 		p1 = new Produto("bola", 25, "Equipamento", 1, "");
-		p1.addPS(psDB.getPS("Transporte"));
+		p1.addPS("Transporte");
 		psDB.addPS(p1);
 		
 	}

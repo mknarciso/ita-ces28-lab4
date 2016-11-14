@@ -29,10 +29,10 @@ public class TaxesTest {
 		T1 = new Produto("T1", 15, "Produtos", 1 , "obs");
 		T2 = new Produto("T2", 25, "Produtos", 2 , "obs 2");
 		lista = new ArrayList<ItemDeVenda>();
-		T2.addPS(PsDb.getPS("S1"));
+		T2.addPS("S1");
 		PsDb.addPS(T2);
-		T1.addPS(PsDb.getPS("S1"));
-		T1.addPS(PsDb.getPS("T2"));
+		T1.addPS("S1");
+		T1.addPS("T2");
 		PsDb.addPS(T1);
 		//System.out.println(iv);
 		dbTax = DbConnectTax.getInstance();
