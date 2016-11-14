@@ -13,7 +13,7 @@ public class NFBuilder {
 	//nota fiscal em elabora��o
 	
 	private double _valor = 0;
-	private float _impostos;
+	private double _impostos;
 	private String _outros;
 	private ArrayList<ItemDeVenda> _itensLista;
 	private boolean _validate = false;
@@ -96,7 +96,7 @@ public class NFBuilder {
 		return _valor;
 	}
 	
-	public float getImposto() {
+	public double getImposto() {
 		return _impostos;
 	}
 	public List<ItemDeVenda> getItemsList() {

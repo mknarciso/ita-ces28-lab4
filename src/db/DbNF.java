@@ -26,11 +26,13 @@ public class DbNF {
 	}
 	
 	public int generateID(NFBuilder newNF) {
+		// Mock for the unique id generator
 		_id++;
 		return _id;
 	}
 	
 	public boolean existsNF(int id) {
+		// See if the NF already exists
 		for (int i = 0; i < nfs.size(); i++) {
 			if (nfs.get(i).getId() == id)
 				return true;			

@@ -6,7 +6,7 @@ public final class NotaFiscal {
 	//immutable object
 	private final int _id;
 	private final double _valor;
-	private final float _impostos;
+	private final double _impostos;
 	private final String _outros;
 	private final List<ItemDeVenda> _itensLista;
 	
@@ -40,7 +40,7 @@ public final class NotaFiscal {
 		return _valor;
 	}
 	
-	private float getImposto() {
+	private double getImposto() {
 		return _impostos;
 	}
 	public String getOutros() {

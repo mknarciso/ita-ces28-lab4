@@ -6,22 +6,27 @@ import nota_fiscal.ItemDeVenda;
 import ps.PS;
 
 public class DbTax {
+	// Each Tax is an object of a SubClass of Imposto
 	private IPI imposto1;
 	private ICMS imposto2;
-	static int itemQtde;
+	protected static int itemQtde;
+	
 	public double calculateTax(ArrayList<ItemDeVenda> idv) {
+		// This method is called once for each NF, so taxes instances are
+		// reset, and could keep persistent values through all NF Tax calculation 
 		imposto1 = new IPI(); 
 		imposto2 = new ICMS(); 
 		for(int i=0;i<idv.size();i++){
+			//Gets IV quantity 
 			itemQtde = idv.get(i).getQuantity();
-			//System.out.println(idv.get(0).getPS());
+			//Calculate all taxes for each IV
 			allTaxes(idv.get(i).getPS());
 		}
+		//Return all accumulated taxes 
 		return sumTaxes();
 	}
 
 	private double sumTaxes() {
-		//System.out.println("Sum Taxes:"+imposto1.getTotal()+"+"+imposto2.getTotal());
 		return imposto1.getTotal()+imposto2.getTotal();
 	}
 
