@@ -6,9 +6,9 @@ import nota_fiscal.ItemDeVenda;
 import ps.PS;
 
 public class DbTax {
-	IPI imposto1;
-	ICMS imposto2;
-	public static int itemQtde;
+	private IPI imposto1;
+	private ICMS imposto2;
+	static int itemQtde;
 	public double calculateTax(ArrayList<ItemDeVenda> idv) {
 		imposto1 = new IPI(); 
 		imposto2 = new ICMS(); 

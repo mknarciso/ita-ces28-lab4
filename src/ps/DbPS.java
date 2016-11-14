@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DbPS {
-	List<PS> dados = new ArrayList<PS>();
+	private List<PS> dados = new ArrayList<PS>();
 	List<PS> getAll(){
 		return null;
 	}

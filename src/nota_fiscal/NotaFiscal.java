@@ -1,6 +1,7 @@
 package nota_fiscal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class NotaFiscal {
 	//immutable object
@@ -8,7 +9,7 @@ public final class NotaFiscal {
 	private final double _valor;
 	private final float _impostos;
 	private final String _outros;
-	private final ArrayList<ItemDeVenda> _itensLista;
+	private final List<ItemDeVenda> _itensLista;
 	
 	public int getId(){
 		return _id;
@@ -18,7 +19,7 @@ public final class NotaFiscal {
 		_id = id;
 		_valor = NF.getValue();
 		_impostos = NF.getImposto();
-		_itensLista = (ArrayList<ItemDeVenda>) NF.getItemsList();
+		_itensLista = NF.getItemsList();
 		
 	}
 	

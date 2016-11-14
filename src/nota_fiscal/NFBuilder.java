@@ -28,7 +28,7 @@ public class NFBuilder {
 			validateNF();
 			try { 
 				int id = DbConnectNF.getInstance().generateID(this);
-				System.out.println("Id:"+id);
+				//System.out.println("Id:"+id);
 				NotaFiscal notaFiscal = new NotaFiscal(this, id);
 				DbConnectNF.getInstance().persistNF(notaFiscal);
 				_validate = true;
@@ -69,7 +69,7 @@ public class NFBuilder {
 	private void validateNF() throws NotValidNFException {
 		try {
 			_impostos = DbConnectTax.getInstance().calculateTax(_itensLista);
-			System.out.println("Impostos Total:"+_impostos);
+			//System.out.println("Impostos Total:"+_impostos);
 		} catch (Exception e) {
 			throw new NotValidNFException();			
 		}
