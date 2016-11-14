@@ -2,9 +2,13 @@ package testes;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import db.NFAlreadyValidatedException;
 import nota_fiscal.NFBuilder;
+import nota_fiscal.NotValidNFException;
 import nota_fiscal.NotaFiscal;
 import ps.DbConnectPS;
 import ps.PS;
@@ -17,6 +21,7 @@ public class ClientTest {
 	
 	@BeforeClass
 	public static void setup() throws Exception {
+		//In setup, in build up the PS trees hardcoded
 		psDB = DbConnectPS.getInstance();
 		c1 = new Produto("Caixa", 2, "Embalagem", 1 , "obs");
 		psDB.addPS(c1);
@@ -39,8 +44,11 @@ public class ClientTest {
 		psDB.addPS(p1);
 		
 	}
+	
 	@Test
 	public void testNFBuilder() {
+		//In this NF Builder test, we construct a Builder
+		//and simulate adding and removing items
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);
 		String result = "NF em elabora��o\n"
 				+ "IV List:\n" + "banana, 40 unidades\n";
@@ -60,7 +68,9 @@ public class ClientTest {
 	}
 	
 	@Test 
-	public void testgenerateNF() {
+	public void testgenerateNF() throws NFAlreadyValidatedException, NotValidNFException {
+		//In this test, we create a NFBuilder, validates (calculating taxes) and
+		// persists it, generating a immutable NotaFiscal
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);
 		nFBuilder.addItemDeVenda("laranja", 200);
 		NotaFiscal notaFiscal = nFBuilder.saveNF();
@@ -97,4 +107,16 @@ public class ClientTest {
 
 		assertEquals (resultTwo, notaFiscalTwo.printNF());
 	}
+	
+	@Test(expected = NFAlreadyValidatedException.class)
+	public void testAlreadyValidatedException() throws NFAlreadyValidatedException, NotValidNFException {
+		//This tests tries to save the same NF twice
+		//So the system throws NFAlreadyValidatedException
+		NFBuilder nFBuilder = new NFBuilder("bola", 10);
+		nFBuilder.saveNF();
+		//Trying to save once more
+		nFBuilder.saveNF(); //Exception thrown
+	}
+	
+	
 }

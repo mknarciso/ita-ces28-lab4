@@ -25,7 +25,7 @@ public class NFBuilder {
 		addItemDeVenda(productServ, quantity);
 		
 	}
-	public NotaFiscal saveNF() {
+	public NotaFiscal saveNF() throws NFAlreadyValidatedException, NotValidNFException {
 		//Validates NF, generate a final NF with unique ID 
 		//and persists it in database.
 		try {
@@ -38,13 +38,12 @@ public class NFBuilder {
 				_validate = true;
 				return notaFiscal;
 			} catch (NFAlreadyValidatedException e) { //NF valid, but already validated
-				e.printStackTrace();
+				throw e;
 			}			
 		} catch (NotValidNFException e) { //NF not valid!
-			e.printStackTrace();
+			throw e;
 
 		}
-		return null;
 		
 	}
 	
