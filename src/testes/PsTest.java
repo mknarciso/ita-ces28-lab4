@@ -3,13 +3,16 @@ package testes;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import nota_fiscal.NotaFiscal;
 import ps.DbConnectPS;
 import ps.PS;
+import ps.ServicoFinal;
 
 public class PsTest {
 	DbConnectPS psDB = DbConnectPS.getInstance();
@@ -43,13 +46,30 @@ public class PsTest {
 		psDB.addToPSSubPS("aT2","aS1");
 		assertEquals(48, psDB.getPS("aT2").getPrice(),0.01);	
 	}
+	@Rule
+    public ExpectedException thrown= ExpectedException.none();
+	@Test
+	public void tryToModifyList() throws Exception{
+		thrown.expect(UnsupportedOperationException.class);
+		psDB.newPS("Produto","eT2", 10, "Frutas", 1 , "Produto principal");
+		psDB.newPS("Servico","eS1", 23, "Frutas", 1 , "Serviço principal");
+		psDB.addToPSSubPS("eT2","eS1");
+		List<PS> lista = psDB.getPS("eT2").getLista();
+		lista.remove(0);
+	}	
+	@Test
+	public void checkIfItemsInListAreFinal() throws Exception{
+		psDB.newPS("Produto","eT2", 10, "Frutas", 1 , "Produto principal");
+		psDB.newPS("Servico","eS1", 23, "Frutas", 1 , "Serviço principal");
+		psDB.addToPSSubPS("eT2","eS1");
+		List<PS> lista = psDB.getPS("eT2").getLista();
+		assertTrue (lista.get(0) instanceof ServicoFinal);
+	}
 	@Test
 	public void checkAccess() throws Exception{
 		assertFalse(PS.class.getDeclaredMethod("addPS", String.class).isAccessible());
 		assertEquals(0,PS.class.getConstructors().length);
 	}
-	@Rule
-    public ExpectedException thrown= ExpectedException.none();
 	@Test
 	public void checkFinal() throws Exception{
 		thrown.expect(Exception.class);

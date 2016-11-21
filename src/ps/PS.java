@@ -85,8 +85,8 @@ public abstract class PS {
 		return _outros;
 	}
 	
-	public ArrayList<PS> getLista(){
-		return (ArrayList<PS>) Collections.unmodifiableList(_listaPS);
+	public List<PS> getLista(){
+		return  Collections.unmodifiableList(_listaPS);
 	}
 
 	/*private void addImposto(double last) {
