@@ -11,7 +11,7 @@ public abstract class PS {
 	protected String _outros;
 	protected ArrayList<PS> _listaPS;
 	
-	public PS(String nome, float preco, String setor, int categoriaTributaria, String outros){
+	protected PS(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		_nome=nome;
 		_preco=preco;
 		_setor=setor;
@@ -20,7 +20,7 @@ public abstract class PS {
 		_listaPS = new ArrayList<PS>();
 	}
 	
-	public void addPS(String name) throws Exception{
+	protected void addPS(String name) throws Exception{
 		throw new Exception("Não pode inserir Produto/Serviço em: "
                 + this._nome + " - Já é o Produto/Serviço final");
 	}
@@ -30,10 +30,11 @@ public abstract class PS {
                 + this._nome + " - Já é o Produto/Serviço final");
 	}
 	
-	public PS getPS(int index) throws Exception{
-		throw new Exception("Não pode obter Produto/Serviço em: "
-                + this._nome + " - é o Produto/Serviço final");
-
+	public PS getPS(int index){
+		if (index<=_listaPS.size() && index>0){
+			return _listaPS.get(index);
+		}
+		return null;
 	}
 	
 	public void aceitarVisitante(psVisitor visitor) {

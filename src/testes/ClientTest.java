@@ -7,36 +7,26 @@ import org.junit.Test;
 import nota_fiscal.NFBuilder;
 import nota_fiscal.NotaFiscal;
 import ps.DbConnectPS;
-import ps.PS;
-import ps.Produto;
-import ps.Servico;
 
 public class ClientTest {
-	static PS f1,f2,f3,p1,c1,s1;
 	static DbConnectPS psDB;
 	
 	@BeforeClass
 	public static void setup() throws Exception {
 		psDB = DbConnectPS.getInstance();
-		c1 = new Produto("Caixa", 2, "Embalagem", 1 , "obs");
-		psDB.addPS(c1);
-		s1 = new Servico("Transporte", 23, "Logistica", 3 , "Serviço principal");
-		psDB.addPS(s1);
-		f1 = new Produto("banana", 15, "Frutas", 2 , "Produto principal");
-		f1.addPS("Caixa");
-		f1.addPS("Transporte");
-		psDB.addPS(f1);
-		f2 = new Produto("laranja", 10, "Frutas", 2 , "Produto principal");
-		f2.addPS("Caixa");
-		f2.addPS("Transporte");
-		psDB.addPS(f2);
-		f3 = new Produto("batata", 5, "Frutas", 2 , "Produto principal");
-		f3.addPS("Caixa");
-		f3.addPS("Transporte");
-		psDB.addPS(f3);
-		p1 = new Produto("bola", 25, "Equipamento", 1, "");
-		p1.addPS("Transporte");
-		psDB.addPS(p1);
+		psDB.newPS("Produto","Caixa", 2, "Embalagem", 1 , "obs");
+		psDB.newPS("Serviço","Transporte", 23, "Logistica", 3 , "Serviço principal");
+		psDB.newPS("Produto","banana", 15, "Frutas", 2 , "Produto principal");
+		psDB.addToPSSubPS("banana","Caixa");
+		psDB.addToPSSubPS("banana","Transporte");
+		psDB.newPS("Produto","laranja", 10, "Frutas", 2 , "Produto principal");
+		psDB.addToPSSubPS("laranja","Caixa");
+		psDB.addToPSSubPS("laranja","Transporte");
+		psDB.newPS("Produto","batata", 5, "Frutas", 2 , "Produto principal");
+		psDB.addToPSSubPS("batata","Caixa");
+		psDB.addToPSSubPS("batata","Transporte");
+		psDB.newPS("Produto","bola", 25, "Equipamento", 1, "");
+		psDB.addToPSSubPS("bola","Transporte");
 		
 	}
 	@Test

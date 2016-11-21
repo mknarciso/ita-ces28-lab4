@@ -9,9 +9,15 @@ public class DbPS {
 		return null;
 	}
 
-	protected void addPS(PS newProduct) {
-		dados.add(newProduct);
-	}
+   protected void newPS(String type,String nome, float preco, String setor, int categoriaTributaria, String outros){
+	   PS newProduct;
+	   if(type.equals("Produto"))
+		   newProduct = new Produto(nome, preco, setor, categoriaTributaria, outros);
+	   else
+		   newProduct = new Servico(nome, preco, setor, categoriaTributaria, outros);
+	   dados.add(newProduct);
+   }
+	
 	protected PS getPS(String name){
 		//System.out.println(dados.size()+" PS no banco de dados.");
 		for(int i=0;i<dados.size();i++){
@@ -21,6 +27,21 @@ public class DbPS {
 			}
 		}
 		return null;
+	}
+	
+	private PS getPSNonFinal(String name){
+		for(int i=0;i<dados.size();i++){
+			if (dados.get(i)._nome.equals(name)){
+				return dados.get(i);
+			}
+		}
+		return null;
+	}
+
+	public void addToPSSubPS(String main, String sub) throws Exception {
+		PS editing;
+		editing = this.getPSNonFinal(main);
+		editing.addPS(sub);
 	}
 
 }

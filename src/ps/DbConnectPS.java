@@ -24,9 +24,14 @@ public class DbConnectPS { // Singleton
 		   return psDB.getAll();
 	   }
 	   
-	   public void addPS(PS newProduct){
-		   psDB.addPS(newProduct);
+	   public void newPS(String type,String nome, float preco, String setor, int categoriaTributaria, String outros){
+		   psDB.newPS(type, nome, preco, setor, categoriaTributaria, outros);
 	   }
+	   
+	   public void addToPSSubPS(String main, String sub) throws Exception{
+		   psDB.addToPSSubPS(main,sub);
+	   }
+	   
 	   public PS getPS(String name){
 		   return psDB.getPS(name);
 	   }
