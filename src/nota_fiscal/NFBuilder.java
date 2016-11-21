@@ -58,13 +58,15 @@ public class NFBuilder {
 		
 	}
 
-	public void removeItemDeVenda(String productServ) {
+	public void removeItemDeVenda(String productServ) throws Exception {
 		//Remove a Item de Venda by its type
 		for(Iterator<ItemDeVenda> i = _itensLista.iterator(); i.hasNext();){
 			ItemDeVenda atual = i.next();
 			if(atual.getName().equals(productServ))
 				i.remove();
 		}
+		if(_itensLista.size()==0)
+			throw new Exception("Nota Fiscal não pode ter zero IV");
 	}
 	
 	private void validateNF() throws NotValidNFException {

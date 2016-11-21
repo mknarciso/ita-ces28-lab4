@@ -36,7 +36,7 @@ public class ClientTest {
 	}
 	
 	@Test
-	public void testNFBuilder() {
+	public void testNFBuilder() throws Exception {
 		//In this NF Builder test, we construct a Builder
 		//and simulate adding and removing items
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);

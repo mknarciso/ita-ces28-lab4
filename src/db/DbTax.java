@@ -11,11 +11,15 @@ public class DbTax {
 	private ICMS taxICMS;
 	protected static int itemQtde;
 	
-	public double calculateTax(ArrayList<ItemDeVenda> idv) {
-		// This method is called once for each NF, so taxes instances are
-		// reset, and could keep persistent values through all NF Tax calculation 
+	protected DbTax(){
 		taxIPI = new IPI(); 
 		taxICMS = new ICMS(); 
+	}
+	
+	public double calculateTax(ArrayList<ItemDeVenda> idv) {
+		// This method is called once for each NF, so taxes instances are
+		// reset, but could keep persistent values 
+		resetAll();
 		for(int i=0;i<idv.size();i++){
 			//Gets IV quantity 
 			itemQtde = idv.get(i).getQuantity();
@@ -28,6 +32,10 @@ public class DbTax {
 
 	private double sumTaxes() {
 		return taxIPI.getTotal()+taxICMS.getTotal();
+	}
+	private void resetAll(){
+		taxIPI.reset();
+		taxICMS.reset();
 	}
 
 	private void allTaxes(PS raiz){

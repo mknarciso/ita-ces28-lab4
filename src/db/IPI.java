@@ -9,8 +9,6 @@ public class IPI extends Imposto{
 			last = 0.5*quantity+valor*0.16;
 		
 		total = total + last;
-		// Exemplo de acesso a dado persistente:
-		// +DbConnectTax.getInstance().persistValue;
 	}
 
 }

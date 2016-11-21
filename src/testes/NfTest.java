@@ -3,7 +3,9 @@ package testes;
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import db.NFAlreadyValidatedException;
 import nota_fiscal.NFBuilder;
@@ -42,6 +44,15 @@ public class NfTest {
 			assertFalse(nFBuilder.getClass().getFields()[j].isAccessible());
 		}
 	}	
+	@Rule
+    public ExpectedException thrown= ExpectedException.none();
+	@Test
+	public void NFWithoutIVs() throws Exception{
+		thrown.expect(Exception.class);
+		NFBuilder nFBuilder = new NFBuilder("pessego", 40);
+		nFBuilder.removeItemDeVenda("pessego");
+		
+	}
 	
 	/* Estes testes podem causar mudança na numeracao das NF usadas em ClientTest.java, 
 	 * uma vez que o taxDB é único e a ordem dos testes, que é aleatória interfere na 

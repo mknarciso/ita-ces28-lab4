@@ -1,12 +1,10 @@
 package ps;
 
-import java.text.DecimalFormat;
 
 public class PsPrinter implements psVisitor {
 	//PS Printer uses Visitor Pattern to travel through PS tree structure
 	//and prints its nodes.
 	
-	private DecimalFormat df = new DecimalFormat("######.00");
 	private String output;
 	public PsPrinter(){
 		output ="";
