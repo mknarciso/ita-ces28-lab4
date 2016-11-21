@@ -3,9 +3,9 @@ package ps;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbPS {
+public class DbPS { //Product and Service database "Mock"
 	private List<PS> dados = new ArrayList<PS>();
-	List<PS> getAll(){
+	protected List<PS> getAll(){
 		return null;
 	}
 

@@ -1,16 +1,19 @@
 package ps;
 
 public class PriceCalculator implements psVisitor {
-	protected double total=0;
+	//PriceCalculator: Uses Visitor patterns to
+	//travel throught the PS tree and calculate price/taxes.
+	protected double total_ = 0;
+	
 	public void resetPrice(){
-		total=0;
+		total_ = 0;
 	}
 	public double getTotal() {
-		return total;
+		return total_;
 	}
 	@Override
 	public void visitar(PS ps) {
-		total = total + ps._preco;
+		total_ = total_ + ps._preco;
 	}
 
 }

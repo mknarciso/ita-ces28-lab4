@@ -22,6 +22,6 @@ public class DbConnectTax {
 		return taxDB.calculateTax(idv);
 	}
 
-	DbTax taxDB;
+	private DbTax taxDB;
 
 }

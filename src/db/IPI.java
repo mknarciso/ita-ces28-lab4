@@ -2,10 +2,11 @@ package db;
 
 public class IPI extends Imposto{
 	@Override
-	public void calculaImposto(int qtde, float valor, int cat) {
+	public void calculaImposto(int quantity, float valor, int category) {
+		//Calculate IPI Strategy 
 		last = 0;
-		if(cat==1)
-			last = 0.5*qtde+valor*0.16;
+		if(category == 1)
+			last = 0.5*quantity+valor*0.16;
 		
 		total = total + last;
 	}

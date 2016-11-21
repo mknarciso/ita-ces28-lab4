@@ -6,14 +6,16 @@ import java.util.List;
 
 import nota_fiscal.*;
 
-public class DbNF {
+public class DbNF { //NF Database "Mock"
 	private int _id = 201600000;
 	private List<NotaFiscal> nfs = new ArrayList<NotaFiscal>();
 	
 	public List<NotaFiscal> getAll() {
+		//return a unmodifiable list
 		return Collections.unmodifiableList(nfs);
 	}
 	public NotaFiscal getNF(int id){
+		//Search for a NF by the ID
 		for(int i=0;i<nfs.size();i++){
 			if (nfs.get(i).getId()==id){
 				return nfs.get(i);

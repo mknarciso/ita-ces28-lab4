@@ -2,9 +2,13 @@ package testes;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import db.NFAlreadyValidatedException;
 import nota_fiscal.NFBuilder;
+import nota_fiscal.NotValidNFException;
 import nota_fiscal.NotaFiscal;
 import ps.DbConnectPS;
 
@@ -13,6 +17,7 @@ public class ClientTest {
 	
 	@BeforeClass
 	public static void setup() throws Exception {
+		//In setup, in build up the PS trees hardcoded
 		psDB = DbConnectPS.getInstance();
 		psDB.newPS("Produto","Caixa", 2, "Embalagem", 1 , "obs");
 		psDB.newPS("Serviço","Transporte", 23, "Logistica", 3 , "Serviço principal");
@@ -29,8 +34,11 @@ public class ClientTest {
 		psDB.addToPSSubPS("bola","Transporte");
 		
 	}
+	
 	@Test
 	public void testNFBuilder() {
+		//In this NF Builder test, we construct a Builder
+		//and simulate adding and removing items
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);
 		String result = "NF em elabora��o\n"
 				+ "IV List:\n" + "banana, 40 unidades\n";
@@ -50,17 +58,55 @@ public class ClientTest {
 	}
 	
 	@Test 
-	public void testgenerateNF() {
+	public void testgenerateNF() throws NFAlreadyValidatedException, NotValidNFException {
+		//In this test, we create a NFBuilder, validates (calculating taxes) and
+		// persists it, generating a immutable NotaFiscal
 		NFBuilder nFBuilder = new NFBuilder("banana", 40);
 		nFBuilder.addItemDeVenda("laranja", 200);
 		NotaFiscal notaFiscal = nFBuilder.saveNF();
 		assertEquals (996.64,nFBuilder.getImposto(), 0.1);
 		assertTrue (notaFiscal instanceof NotaFiscal);
 		assertEquals (201600001,notaFiscal.getId());
-		System.out.println(notaFiscal.printNF());
+		String result = "NF completa - ID 201600001\n" + 
+				"IV List:\n" + 
+					"==[ 40 unidades de banana ]==\n" + 
+					"====>      banana   Preço:      40,00   Imposto:      96,00\n" + 
+					"====>       Caixa   Preço:       2,00   Imposto:      25,12\n" +
+					"====>  Transporte   Preço:      23,00   Imposto:      55,20\n" +
+					"==[ 200 unidades de laranja ]==\n" + 
+					"====>     laranja   Preço:      35,00   Imposto:     420,00\n" +
+					"====>       Caixa   Preço:       2,00   Imposto:     124,32\n" +
+					"====>  Transporte   Preço:      23,00   Imposto:     276,00\n" +
+					"Valor final: 8600.0\n" +
+					"Impostos calculados: 996.64\n";
+		
+		assertEquals(notaFiscal.printNF(), result);
+		
 		NFBuilder nFBuilderTwo = new NFBuilder("bola", 10);
+		
 		NotaFiscal notaFiscalTwo = nFBuilderTwo.saveNF();
 		assertEquals(201600002,notaFiscalTwo.getId());
-		System.out.println(notaFiscalTwo.printNF());
+		String resultTwo = "NF completa - ID 201600002\n" + 
+				"IV List:\n" + 
+				"==[ 10 unidades de bola ]==\n" + 
+				"====>        bola   Preço:      48,00   Imposto:      41,48\n" +
+				"====>  Transporte   Preço:      23,00   Imposto:      13,80\n" +
+				"Valor final: 480.0\n" + 
+				"Impostos calculados: 55.279999999999994\n";
+
+
+		assertEquals (resultTwo, notaFiscalTwo.printNF());
 	}
+	
+	@Test(expected = NFAlreadyValidatedException.class)
+	public void testAlreadyValidatedException() throws NFAlreadyValidatedException, NotValidNFException {
+		//This tests tries to save the same NF twice
+		//So the system throws NFAlreadyValidatedException
+		NFBuilder nFBuilder = new NFBuilder("bola", 10);
+		nFBuilder.saveNF();
+		//Trying to save once more
+		nFBuilder.saveNF(); //Exception thrown
+	}
+	
+	
 }

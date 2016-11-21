@@ -18,7 +18,7 @@ public class DbConnectPS { // Singleton
 	      return instance;
 	   }
 
-	   DbPS psDB;
+	   private DbPS psDB;
 	   
 	   public List<PS> getAll(){
 		   return psDB.getAll();

@@ -1,6 +1,7 @@
 package ps;
 
 public class Produto extends PS {	
+	//Product Model
 	
 	protected Produto(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		super(nome, preco, setor, categoriaTributaria, outros);
