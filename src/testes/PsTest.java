@@ -2,9 +2,15 @@ package testes;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Method;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import ps.DbConnectPS;
+import ps.PS;
+import ps.ProdutoFinal;
 
 public class PsTest {
 	DbConnectPS psDB = DbConnectPS.getInstance();
@@ -38,5 +44,21 @@ public class PsTest {
 		psDB.addToPSSubPS("aT2","aS1");
 		assertEquals(48, psDB.getPS("aT2").getPrice(),0.01);	
 	}
-
+	@Test
+	public void checkAccess() throws Exception{
+		assertFalse(PS.class.getDeclaredMethod("addPS", String.class).isAccessible());
+		assertEquals(0,PS.class.getConstructors().length);
+	}
+	@Rule
+    public ExpectedException thrown= ExpectedException.none();
+	@Test
+	public void checkFinal() throws Exception{
+		thrown.expect(Exception.class);
+		psDB.newPS("Produto","dT1", 15, "Frutas", 1 , "Produto principal");
+		psDB.newPS("Produto","dT2", 10, "Frutas", 1 , "Produto principal");
+		PS T1 = psDB.getPS("dT1");
+		Method privateMethod = PS.class.getDeclaredMethod("addPS", String.class);
+		privateMethod.setAccessible(true);
+		privateMethod.invoke(T1, "dT2");
+	}
 }
