@@ -12,6 +12,7 @@ public abstract class PS {
 	protected int _categoriaTributaria;
 	protected String _outros;
 	protected ArrayList<PS> _listaPS;
+	protected boolean impostoFinal;
 	
 	protected PS(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		_nome=nome;
@@ -20,6 +21,7 @@ public abstract class PS {
 		_categoriaTributaria=categoriaTributaria;
 		_outros=outros;
 		_listaPS = new ArrayList<PS>();
+		impostoFinal = false;
 	}
 	
 
@@ -47,6 +49,7 @@ public abstract class PS {
 			_listaPS.get(i).aceitarVisitante(visitor);
 		}
         visitor.visitar(this);
+        addImposto(visitor.getLast());
     }
 	public void preAceitarVisitante(psVisitor visitor) {
         visitor.visitar(this);
@@ -85,7 +88,7 @@ public abstract class PS {
 		return _listaPS;
 	}
 
-	public void setImposto(double last) {
+	private void addImposto(double last) {
 		_imposto = _imposto + last;
 		
 	}

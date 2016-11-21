@@ -21,7 +21,7 @@ public abstract class Imposto implements psVisitor {
 			//Visitor pattern 
 			//System.out.println("CalculaImposto:"+DbTax.itemQtde+","+ps.getPrice()+","+ps.getCategoriaTributaria());
 			calculaImposto(DbTax.itemQtde,ps.getPrice(),ps.getCategoriaTributaria());
-			ps.setImposto(last);
+			//ps.addImposto(last);
 			
 		}
 		protected void reset(){

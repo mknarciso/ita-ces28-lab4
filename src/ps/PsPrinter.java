@@ -16,5 +16,7 @@ public class PsPrinter implements psVisitor {
 	public String getString() {
 		return output;
 	}
-
+	public double getLast(){
+		return 0;
+	}
 }
