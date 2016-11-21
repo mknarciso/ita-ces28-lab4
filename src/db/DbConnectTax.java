@@ -6,6 +6,7 @@ import nota_fiscal.ItemDeVenda;
 public class DbConnectTax {
 	// create an object of SingleObject
 	private static DbConnectTax instance = new DbConnectTax();
+	protected static int persistValue=0;
 
 	// make the constructor private so that this class cannot be
 	// instantiated

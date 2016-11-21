@@ -10,7 +10,6 @@ import org.junit.rules.ExpectedException;
 
 import ps.DbConnectPS;
 import ps.PS;
-import ps.ProdutoFinal;
 
 public class PsTest {
 	DbConnectPS psDB = DbConnectPS.getInstance();

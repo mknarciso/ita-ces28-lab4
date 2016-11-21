@@ -96,6 +96,8 @@ public class ClientTest {
 
 
 		assertEquals (resultTwo, notaFiscalTwo.printNF());
+		// NotaFiscal têm ids diferentes
+		assertFalse(notaFiscal.getId()==notaFiscalTwo.getId());
 	}
 	
 	@Test(expected = NFAlreadyValidatedException.class)

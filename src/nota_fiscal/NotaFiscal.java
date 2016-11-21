@@ -14,7 +14,7 @@ public final class NotaFiscal {
 	public int getId(){
 		return _id;
 	}
-	public NotaFiscal(NFBuilder NF, int id) {
+	protected NotaFiscal(NFBuilder NF, int id) {
 		_outros = "";
 		_id = id;
 		_valor = NF.getValue();
