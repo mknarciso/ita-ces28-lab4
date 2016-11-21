@@ -11,12 +11,9 @@ public class PsPrinter implements psVisitor {
 	}
 	@Override
 	public void visitar(PS ps) {
-		output = output +"====>"+String.format("%12s",ps.getName())+"   Preço: "+String.format("%,10.2f",ps.getPrice())+ "   Imposto: "+String.format("%,10.2f",ps._imposto)+"\n";
+		output = output +"====>"+String.format("%12s",ps.getName())+"   Preço: "+String.format("%,10.2f",ps.getPrice())+ /*"   Imposto: "+String.format("%,10.2f",ps._imposto)+*/"\n";
 	}
 	public String getString() {
 		return output;
-	}
-	public double getLast(){
-		return 0;
 	}
 }

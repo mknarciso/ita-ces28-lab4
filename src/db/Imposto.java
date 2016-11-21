@@ -12,9 +12,6 @@ public abstract class Imposto implements psVisitor {
 		public double getTotal() {
 			return total;
 		}
-		public double getLast(){
-			return last;
-		}
 
 		@Override
 		public void visitar(PS ps) {

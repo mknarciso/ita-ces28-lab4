@@ -1,18 +1,20 @@
 package ps;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 
 public abstract class PS {
 	//PS is the abstraction of product and service (Abstract Coupling Pattern)
 	//PS is a composite in a tree structure
 	protected String _nome;
 	protected float _preco;
-	protected double _imposto;
+	//protected double _imposto;
 	protected String _setor;
 	protected int _categoriaTributaria;
 	protected String _outros;
-	protected ArrayList<PS> _listaPS;
-	protected boolean impostoFinal;
+	protected List<PS> _listaPS;
 	
 	protected PS(String nome, float preco, String setor, int categoriaTributaria, String outros){
 		_nome=nome;
@@ -21,7 +23,6 @@ public abstract class PS {
 		_categoriaTributaria=categoriaTributaria;
 		_outros=outros;
 		_listaPS = new ArrayList<PS>();
-		impostoFinal = false;
 	}
 	
 
@@ -49,7 +50,7 @@ public abstract class PS {
 			_listaPS.get(i).aceitarVisitante(visitor);
 		}
         visitor.visitar(this);
-        addImposto(visitor.getLast());
+        //addImposto(visitor.getLast());
     }
 	public void preAceitarVisitante(psVisitor visitor) {
         visitor.visitar(this);
@@ -85,13 +86,13 @@ public abstract class PS {
 	}
 	
 	public ArrayList<PS> getLista(){
-		return _listaPS;
+		return (ArrayList<PS>) Collections.unmodifiableList(_listaPS);
 	}
 
-	private void addImposto(double last) {
+	/*private void addImposto(double last) {
 		_imposto = _imposto + last;
 		
-	}
+	}*/
 	
 }
 	

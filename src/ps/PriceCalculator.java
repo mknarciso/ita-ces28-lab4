@@ -15,7 +15,4 @@ public class PriceCalculator implements psVisitor {
 	public void visitar(PS ps) {
 		total_ = total_ + ps._preco;
 	}
-	public double getLast(){
-		return 0;
-	}
 }

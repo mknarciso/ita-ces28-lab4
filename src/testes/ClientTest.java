@@ -70,13 +70,13 @@ public class ClientTest {
 		String result = "NF completa - ID 201600001\n" + 
 				"IV List:\n" + 
 					"==[ 40 unidades de banana ]==\n" + 
-					"====>      banana   Preço:      40,00   Imposto:      96,00\n" + 
-					"====>       Caixa   Preço:       2,00   Imposto:      25,12\n" +
-					"====>  Transporte   Preço:      23,00   Imposto:      55,20\n" +
+					"====>      banana   Preço:      40,00\n"+//   Imposto:      96,00\n" + 
+					"====>       Caixa   Preço:       2,00\n"+//   Imposto:      25,12\n" +
+					"====>  Transporte   Preço:      23,00\n"+//   Imposto:      55,20\n" +
 					"==[ 200 unidades de laranja ]==\n" + 
-					"====>     laranja   Preço:      35,00   Imposto:     420,00\n" +
-					"====>       Caixa   Preço:       2,00   Imposto:     124,32\n" +
-					"====>  Transporte   Preço:      23,00   Imposto:     276,00\n" +
+					"====>     laranja   Preço:      35,00\n"+//   Imposto:     420,00\n" +
+					"====>       Caixa   Preço:       2,00\n"+//   Imposto:     124,32\n" +
+					"====>  Transporte   Preço:      23,00\n"+//   Imposto:     276,00\n" +
 					"Valor final: 8600.0\n" +
 					"Impostos calculados: 996.64\n";
 		
@@ -89,8 +89,8 @@ public class ClientTest {
 		String resultTwo = "NF completa - ID 201600002\n" + 
 				"IV List:\n" + 
 				"==[ 10 unidades de bola ]==\n" + 
-				"====>        bola   Preço:      48,00   Imposto:      41,48\n" +
-				"====>  Transporte   Preço:      23,00   Imposto:      13,80\n" +
+				"====>        bola   Preço:      48,00\n"+//   Imposto:      41,48\n" +
+				"====>  Transporte   Preço:      23,00\n"+//   Imposto:      13,80\n" +
 				"Valor final: 480.0\n" + 
 				"Impostos calculados: 55.279999999999994\n";
 
